@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ps",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "nodejs-ps",
@@ -19,7 +19,8 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "lib"
+    "lib",
+    "binding.gyp"
   ],
   "main": "lib/index.js",
   "repository": {
@@ -80,7 +81,6 @@
     "module_name": "nodejs_ps",
     "module_path": "./lib/binding/",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
-    "remote_path": "./{module_name}/v{version}/{configuration}/",
     "remote_path": "{version}"
   }
 }
