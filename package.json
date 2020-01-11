@@ -1,0 +1,86 @@
+{
+  "name": "nodejs-ps",
+  "version": "0.0.1",
+  "description": "nodejs addon for getting os process information",
+  "keywords": [
+    "nodejs-ps",
+    "ps",
+    "node"
+  ],
+  "homepage": "https://github.com/codejamninja/nodejs-ps",
+  "bugs": {
+    "url": "https://github.com/codejamninja/nodejs-ps/issues",
+    "email": "jam@codejam.ninja"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jam Risser",
+    "email": "jam@codejam.ninja",
+    "url": "https://codejam.ninja"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejamninja/nodejs-ps"
+  },
+  "scripts": {
+    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build",
+    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
+    "clean:purge": "jest --clearCache && git clean -fXd",
+    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "install": "node-pre-gyp install --fallback-to-build",
+    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
+    "node-pre-gyp": "node-pre-gyp",
+    "prepublish": "npm run build",
+    "start": "babel-node --extensions \".ts,.tsx\" src",
+    "test": "npm run lint && jest"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "core-js": "^3.6.3",
+    "nan": "^2.14.0",
+    "node-pre-gyp": "^0.14.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.6",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-config-jam": "^0.2.20",
+    "jest": "^24.9.0",
+    "node-pre-gyp-github": "^1.4.3",
+    "prettier": "^1.19.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.7.4"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "jest": {
+    "testRegex": "tests(/|/.*/)[^_/]*[jt]sx?$",
+    "verbose": true
+  },
+  "gypfile": true,
+  "binary": {
+    "host": "https://github.com/codejamninja/nodejs-ps/releases/download/",
+    "module_name": "nodejs_ps",
+    "module_path": "./lib/binding/",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
+    "remote_path": "./{module_name}/v{version}/{configuration}/",
+    "remote_path": "{version}"
+  }
+}
