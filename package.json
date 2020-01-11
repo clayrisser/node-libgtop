@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ps",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "nodejs-ps",
