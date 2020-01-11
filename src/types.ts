@@ -17,3 +17,9 @@ export interface Netload {
   scope6: number;
   subnet: number;
 }
+
+export interface Uptime {
+  bootTime: number;
+  idletime: number;
+  uptime: number;
+}

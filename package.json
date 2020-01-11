@@ -40,7 +40,7 @@
     "node-pre-gyp": "node-pre-gyp",
     "prepare": "npm run build:notest",
     "prepublish": "npm run build",
-    "start": "babel-node --extensions \".ts,.tsx\" src",
+    "start": "babel-node --extensions \".ts,.tsx\" example",
     "test": "npm run lint && jest"
   },
   "dependencies": {

@@ -1,14 +1,14 @@
-import { getNetload, getProclist } from '../src';
+import LibGTop from '../src';
 
-describe('getProclist()', () => {
+describe('new LibGTop().proclist', () => {
   it('should list all pids', async () => {
-    expect(getProclist()[0]).toBe(1);
+    expect(new LibGTop().proclist[0]).toBe(1);
   });
 });
 
-describe('getNetload()', () => {
+describe('new LibGTop().getNetload(interface)', () => {
   it('should get netload', async () => {
-    expect(getNetload('lo')).toMatchObject({
+    expect(new LibGTop().getNetload('lo')).toMatchObject({
       address6: expect.any(Number),
       address: expect.any(Number),
       bytesIn: expect.any(Number),
@@ -26,6 +26,16 @@ describe('getNetload()', () => {
       prefix6: expect.any(Number),
       scope6: expect.any(Number),
       subnet: expect.any(Number)
+    });
+  });
+});
+
+describe('new LibGTop().uptime', () => {
+  it('should get netload', async () => {
+    expect(new LibGTop().uptime).toMatchObject({
+      bootTime: expect.any(Number),
+      idletime: expect.any(Number),
+      uptime: expect.any(Number)
     });
   });
 });

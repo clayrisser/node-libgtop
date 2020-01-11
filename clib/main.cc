@@ -1,6 +1,7 @@
 #include <glibtop/netload.h>
-#include <iostream>
 #include <glibtop/proclist.h>
+#include <glibtop/uptime.h>
+#include <iostream>
 #include <iostream>
 #include <nan.h>
 #include <v8.h>
@@ -51,6 +52,16 @@ void GetNetload(const Nan::FunctionCallbackInfo<v8::Value>& info) {
   info.GetReturnValue().Set(v8Netload);
 }
 
+void GetUptime(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+  v8::Local<v8::Object> v8Uptime = Nan::New<v8::Object>();
+  glibtop_uptime uptime;
+  glibtop_get_uptime(&uptime);
+  Nan::Set(v8Uptime, Nan::New("bootTime").ToLocalChecked(), Nan::New<v8::Number>(uptime.boot_time));
+  Nan::Set(v8Uptime, Nan::New("idletime").ToLocalChecked(), Nan::New<v8::Number>(uptime.idletime));
+  Nan::Set(v8Uptime, Nan::New("uptime").ToLocalChecked(), Nan::New<v8::Number>(uptime.uptime));
+  info.GetReturnValue().Set(v8Uptime);
+}
+
 void Init(v8::Local<v8::Object> exports) {
   v8::Local<v8::Context> context = exports->CreationContext();
   exports->Set(context,
@@ -59,6 +70,9 @@ void Init(v8::Local<v8::Object> exports) {
   exports->Set(context,
                Nan::New("getNetload").ToLocalChecked(),
                Nan::New<v8::FunctionTemplate>(GetNetload)->GetFunction(context).ToLocalChecked());
+  exports->Set(context,
+               Nan::New("getUptime").ToLocalChecked(),
+               Nan::New<v8::FunctionTemplate>(GetUptime)->GetFunction(context).ToLocalChecked());
 }
 
 NODE_MODULE(gtop, Init)

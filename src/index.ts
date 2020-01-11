@@ -1,12 +1,18 @@
 import getAddon from 'bindings';
-import { Netload } from './types';
+import { Netload, Uptime } from './types';
 
 const addon = getAddon('gtop');
 
-export function getProclist(): number[] {
-  return addon.getProclist();
-}
+export default class LibGTop {
+  get proclist(): number[] {
+    return addon.getProclist();
+  }
 
-export function getNetload(iface: string): Netload {
-  return addon.getNetload(iface);
+  get uptime(): Uptime {
+    return addon.getUptime();
+  }
+
+  getNetload(iface: string): Netload {
+    return addon.getNetload(iface);
+  }
 }
