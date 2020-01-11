@@ -1,7 +1,7 @@
 {
   'targets': [
     {
-      'target_name': 'nodejs-ps',
+      'target_name': 'node-ps-sync',
       'sources': [
         'clib/main.cc'
       ],

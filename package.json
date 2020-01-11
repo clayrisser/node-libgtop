@@ -1,15 +1,15 @@
 {
-  "name": "nodejs-ps",
+  "name": "node-ps-sync",
   "version": "0.0.4",
   "description": "nodejs addon for getting os process information",
   "keywords": [
-    "nodejs-ps",
+    "node-ps-sync",
     "ps",
     "node"
   ],
-  "homepage": "https://github.com/codejamninja/nodejs-ps",
+  "homepage": "https://github.com/codejamninja/node-ps-sync",
   "bugs": {
-    "url": "https://github.com/codejamninja/nodejs-ps/issues",
+    "url": "https://github.com/codejamninja/node-ps-sync/issues",
     "email": "jam@codejam.ninja"
   },
   "license": "MIT",
@@ -26,7 +26,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codejamninja/nodejs-ps"
+    "url": "https://github.com/codejamninja/node-ps-sync"
   },
   "scripts": {
     "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build",
@@ -78,8 +78,8 @@
   },
   "gypfile": true,
   "binary": {
-    "host": "https://github.com/codejamninja/nodejs-ps/releases/download/",
-    "module_name": "nodejs_ps",
+    "host": "https://github.com/codejamninja/node-ps-sync/releases/download/",
+    "module_name": "node_ps_sync",
     "module_path": "./lib/binding/",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
     "remote_path": "{version}"

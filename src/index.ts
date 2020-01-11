@@ -1,6 +1,6 @@
 import getAddon from 'bindings';
 
-const addon = getAddon('nodejs-ps');
+const addon = getAddon('node-ps-sync');
 
 export default function ps(): number[] {
   return addon.list();

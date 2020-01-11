@@ -32,4 +32,4 @@ void Init(v8::Local<v8::Object> exports) {
                Nan::New<v8::FunctionTemplate>(List)->GetFunction(context).ToLocalChecked());
 }
 
-NODE_MODULE(nodejs_ps, Init)
+NODE_MODULE(node_ps_sync, Init)
