@@ -1,8 +1,8 @@
-declare interface HelloAddon {
-  count(): number;
-  list(): number[];
+declare interface Addon {
+  getProclist(): number[];
+  getNetload(): import('../types').Netload;
 }
 
 declare module 'bindings' {
-  export default function getAddon(addonName: string): HelloAddon;
+  export default function getAddon(addonName: string): Addon;
 }

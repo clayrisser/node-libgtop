@@ -1,7 +1,7 @@
 {
   'targets': [
     {
-      'target_name': 'node-ps-sync',
+      'target_name': 'gtop',
       'sources': [
         'clib/main.cc'
       ],

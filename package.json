@@ -1,15 +1,15 @@
 {
-  "name": "node-ps-sync",
+  "name": "libgtop",
   "version": "0.0.4",
   "description": "nodejs addon for getting os process information",
   "keywords": [
-    "node-ps-sync",
+    "libgtop",
     "ps",
     "node"
   ],
-  "homepage": "https://github.com/codejamninja/node-ps-sync",
+  "homepage": "https://github.com/codejamninja/libgtop",
   "bugs": {
-    "url": "https://github.com/codejamninja/node-ps-sync/issues",
+    "url": "https://github.com/codejamninja/libgtop/issues",
     "email": "jam@codejam.ninja"
   },
   "license": "MIT",
@@ -26,10 +26,11 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codejamninja/node-ps-sync"
+    "url": "https://github.com/codejamninja/libgtop"
   },
   "scripts": {
-    "build": "npm run test && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build",
+    "build": "npm run test && npm run build:notest",
+    "build:notest": "babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
     "clean:purge": "jest --clearCache && git clean -fXd",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
@@ -37,6 +38,7 @@
     "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "node-pre-gyp": "node-pre-gyp",
+    "prepare": "npm run build:notest",
     "prepublish": "npm run build",
     "start": "babel-node --extensions \".ts,.tsx\" src",
     "test": "npm run lint && jest"
@@ -78,8 +80,8 @@
   },
   "gypfile": true,
   "binary": {
-    "host": "https://github.com/codejamninja/node-ps-sync/releases/download/",
-    "module_name": "node_ps_sync",
+    "host": "https://github.com/codejamninja/libgtop/releases/download/",
+    "module_name": "libgtop",
     "module_path": "./lib/binding/",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
     "remote_path": "{version}"

@@ -1,7 +1,13 @@
-import ps, { psCount } from '../src';
+import { getNetload, getProclist } from '../src';
 
-describe('ps()', () => {
+describe('getProclist()', () => {
   it('should list all pids', async () => {
-    expect(ps().length).toBe(psCount());
+    expect(getProclist()[0]).toBe(1);
+  });
+});
+
+describe('getNetload()', () => {
+  it('should get netload', async () => {
+    expect(!!getNetload()).toBe(true);
   });
 });

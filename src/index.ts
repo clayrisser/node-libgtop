@@ -1,11 +1,12 @@
 import getAddon from 'bindings';
+import { Netload } from './types';
 
-const addon = getAddon('node-ps-sync');
+const addon = getAddon('gtop');
 
-export default function ps(): number[] {
-  return addon.list();
+export function getProclist(): number[] {
+  return addon.getProclist();
 }
 
-export function psCount(): number {
-  return addon.count();
+export function getNetload(): Netload {
+  return addon.getNetload();
 }
