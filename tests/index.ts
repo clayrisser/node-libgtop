@@ -1,7 +1,7 @@
 import LibGTop from '../src';
 
 describe('new LibGTop().proclist', () => {
-  it('should list all pids', async () => {
+  it('should get proclist', async () => {
     expect(new LibGTop().proclist[0]).toBe(1);
   });
 });
@@ -31,7 +31,7 @@ describe('new LibGTop().getNetload(interface)', () => {
 });
 
 describe('new LibGTop().uptime', () => {
-  it('should get netload', async () => {
+  it('should get uptime', async () => {
     expect(new LibGTop().uptime).toMatchObject({
       bootTime: expect.any(Number),
       idletime: expect.any(Number),
@@ -41,7 +41,13 @@ describe('new LibGTop().uptime', () => {
 });
 
 describe('new LibGTop().netlist', () => {
-  it('should get netload', async () => {
+  it('should get netlist', async () => {
     expect(new LibGTop().netlist).toContain('lo');
+  });
+});
+
+describe('new LibGTop().getProcArgs(pid)', () => {
+  it('should get process args', async () => {
+    expect(new LibGTop().getProcArgs(1)).toEqual('/sbin/init');
   });
 });

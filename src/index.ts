@@ -19,4 +19,8 @@ export default class LibGTop {
   getNetload(iface: string): Netload {
     return addon.getNetload(iface);
   }
+
+  getProcArgs(pid: number): string {
+    return addon.getProcArgs(pid);
+  }
 }
