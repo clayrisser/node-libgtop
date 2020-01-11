@@ -7,6 +7,6 @@ export function getProclist(): number[] {
   return addon.getProclist();
 }
 
-export function getNetload(): Netload {
-  return addon.getNetload();
+export function getNetload(iface: string): Netload {
+  return addon.getNetload(iface);
 }

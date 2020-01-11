@@ -1,6 +1,6 @@
 declare interface Addon {
   getProclist(): number[];
-  getNetload(): import('../types').Netload;
+  getNetload(iface: string): import('../types').Netload;
 }
 
 declare module 'bindings' {

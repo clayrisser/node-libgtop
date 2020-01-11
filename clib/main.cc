@@ -1,4 +1,5 @@
 #include <glibtop/netload.h>
+#include <iostream>
 #include <glibtop/proclist.h>
 #include <iostream>
 #include <nan.h>
@@ -19,7 +20,17 @@ void GetProclist(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 void GetNetload(const Nan::FunctionCallbackInfo<v8::Value>& info) {
   glibtop_netload netload;
   v8::Local<v8::Object> v8Netload = Nan::New<v8::Object>();
-  glibtop_get_netload(&netload, "docker0");
+  if (info.Length() < 1) {
+    return;
+  } else if (info[0]->IsNull()) {
+    return;
+  } else if (info[0]->IsUndefined()) {
+    return;
+  }
+  Nan::Utf8String v8Str(info[0]);
+  std::string cStr(*v8Str);
+  const char* interface = cStr.c_str();
+  glibtop_get_netload(&netload, interface);
   Nan::Set(v8Netload, Nan::New("address").ToLocalChecked(), Nan::New<v8::Number>(netload.address));
   Nan::Set(v8Netload, Nan::New("address6").ToLocalChecked(), Nan::New<v8::Number>(netload.address6[16]));
   Nan::Set(v8Netload, Nan::New("bytesIn").ToLocalChecked(), Nan::New<v8::Number>(netload.bytes_in));
