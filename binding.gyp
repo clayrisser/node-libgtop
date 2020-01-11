@@ -1,27 +1,27 @@
 {
-  "targets": [
+  'targets': [
     {
-      "target_name": "nodejs-ps",
-      "sources": [
-        "src/main.cc"
+      'target_name': 'nodejs-ps',
+      'sources': [
+        'clib/main.cc'
       ],
-      "conditions": [
-        ["OS=='linux'",
+      'conditions': [
+        ['OS=="linux"',
          {
-           "libraries": [
-             "<!@(pkg-config --libs libgtop-2.0)"
+           'libraries': [
+             '<!@(pkg-config --libs libgtop-2.0)'
            ],
-           "ldflags": [
-             "<!@(pkg-config --libs libgtop-2.0)"
+           'ldflags': [
+             '<!@(pkg-config --libs libgtop-2.0)'
            ],
-           "cflags": [
-             "<!@(pkg-config --cflags libgtop-2.0)",
+           'cflags': [
+             '<!@(pkg-config --cflags libgtop-2.0)',
            ]
          }
         ]
       ],
-      "include_dirs": [
-        "<!(node -e \"require('nan')\")"
+      'include_dirs': [
+        '<!(node -e "require(\'nan\')")'
       ]
     }
   ]

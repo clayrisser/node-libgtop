@@ -19,9 +19,9 @@
     "url": "https://codejam.ninja"
   },
   "files": [
-    "build",
-    "lib",
-    "binding.gyp"
+    "binding.gyp",
+    "clib",
+    "lib"
   ],
   "main": "lib/index.js",
   "repository": {
