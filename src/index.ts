@@ -12,6 +12,10 @@ export default class LibGTop {
     return addon.getUptime();
   }
 
+  get netlist(): string[] {
+    return addon.getNetlist();
+  }
+
   getNetload(iface: string): Netload {
     return addon.getNetload(iface);
   }

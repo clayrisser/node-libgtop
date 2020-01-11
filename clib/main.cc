@@ -1,15 +1,15 @@
+#include <glibtop/netlist.h>
 #include <glibtop/netload.h>
 #include <glibtop/proclist.h>
 #include <glibtop/uptime.h>
-#include <iostream>
 #include <iostream>
 #include <nan.h>
 #include <v8.h>
 
 void GetProclist(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+  v8::Local<v8::Array> v8Pids = Nan::New<v8::Array>();
   glibtop_proclist proclist;
   pid_t* pids;
-  v8::Local<v8::Array> v8Pids = Nan::New<v8::Array>();
   pids = glibtop_get_proclist(&proclist, 0, 1);
   for (unsigned int i = 0; i < proclist.number; i++) {
     v8Pids->Set(i, Nan::New<v8::Number>(pids[i]));
@@ -62,6 +62,17 @@ void GetUptime(const Nan::FunctionCallbackInfo<v8::Value>& info) {
   info.GetReturnValue().Set(v8Uptime);
 }
 
+void GetNetlist(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+  v8::Local<v8::Array> v8Netlist = Nan::New<v8::Array>();
+  glibtop_netlist netlist;
+  char** devices;
+  devices = glibtop_get_netlist(&netlist);
+  for (unsigned int i = 0; i < netlist.number; i++) {
+    v8Netlist->Set(i, Nan::New(devices[i]).ToLocalChecked());
+  }
+  info.GetReturnValue().Set(v8Netlist);
+}
+
 void Init(v8::Local<v8::Object> exports) {
   v8::Local<v8::Context> context = exports->CreationContext();
   exports->Set(context,
@@ -73,6 +84,9 @@ void Init(v8::Local<v8::Object> exports) {
   exports->Set(context,
                Nan::New("getUptime").ToLocalChecked(),
                Nan::New<v8::FunctionTemplate>(GetUptime)->GetFunction(context).ToLocalChecked());
+  exports->Set(context,
+               Nan::New("getNetlist").ToLocalChecked(),
+               Nan::New<v8::FunctionTemplate>(GetNetlist)->GetFunction(context).ToLocalChecked());
 }
 
 NODE_MODULE(gtop, Init)

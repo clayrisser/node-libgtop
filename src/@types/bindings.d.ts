@@ -1,4 +1,5 @@
 declare interface Addon {
+  getNetlist(): string[];
   getNetload(iface: string): import('../types').Netload;
   getProclist(): number[];
   getUptime(): import('../types').Uptime;

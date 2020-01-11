@@ -39,3 +39,9 @@ describe('new LibGTop().uptime', () => {
     });
   });
 });
+
+describe('new LibGTop().netlist', () => {
+  it('should get netload', async () => {
+    expect(new LibGTop().netlist).toContain('lo');
+  });
+});
