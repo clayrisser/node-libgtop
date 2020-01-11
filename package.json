@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ps",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "nodejs-ps",
@@ -19,6 +19,7 @@
     "url": "https://codejam.ninja"
   },
   "files": [
+    "build",
     "lib",
     "binding.gyp"
   ],
