@@ -26,20 +26,21 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codejamninja/libgtop"
+    "url": "https://github.com/codejamninja/libgtop.git"
   },
   "scripts": {
     "build": "npm run test && npm run build:notest",
-    "build:notest": "babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build",
+    "build:notest": "babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && tsc -d --emitDeclarationOnly && node-pre-gyp clean build package",
     "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
     "clean:purge": "jest --clearCache && git clean -fXd",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "install": "node-pre-gyp install --fallback-to-build",
-    "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "lint": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx ./",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "node-pre-gyp": "node-pre-gyp",
     "prepare": "npm run build:notest",
     "prepublish": "npm run build",
+    "release": "node-pre-gyp-github publish --release",
     "start": "babel-node --extensions \".ts,.tsx\" example",
     "test": "npm run lint && jest"
   },
@@ -81,8 +82,8 @@
   "gypfile": true,
   "binary": {
     "host": "https://github.com/codejamninja/libgtop/releases/download/",
-    "module_name": "libgtop",
-    "module_path": "./lib/binding/",
+    "module_name": "gtop",
+    "module_path": "build/Release",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
     "remote_path": "{version}"
   }
