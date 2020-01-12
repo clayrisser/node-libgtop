@@ -1,6 +1,6 @@
 {
   "name": "libgtop",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "libgtop",
@@ -40,7 +40,7 @@
     "node-pre-gyp": "node-pre-gyp",
     "prepare": "npm run build:notest",
     "prepublish": "npm run build",
-    "release": "node-pre-gyp-github publish --release",
+    "prepublishOnly": "node-pre-gyp-github publish --release",
     "start": "babel-node --extensions \".ts,.tsx\" example",
     "test": "npm run lint && jest"
   },
