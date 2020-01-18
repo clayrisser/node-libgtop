@@ -1,6 +1,6 @@
 {
   "name": "libgtop",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "libgtop",
@@ -81,7 +81,7 @@
   },
   "gypfile": true,
   "binary": {
-    "host": "https://github.com/codejamninja/node-libgtop/releases/download/",
+    "host": "https://github.com/codejamninja/libgtop/releases/download/",
     "module_name": "gtop",
     "module_path": "build/Release",
     "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
