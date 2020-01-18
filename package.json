@@ -81,10 +81,10 @@
   },
   "gypfile": true,
   "binary": {
-    "host": "https://github.com/codejamninja/libgtop/releases/download/",
+    "host": "https://github.com/codejamninja/node-libgtop/releases/download/",
     "module_name": "gtop",
     "module_path": "build/Release",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
+    "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
     "remote_path": "{version}"
   }
 }
