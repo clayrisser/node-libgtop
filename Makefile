@@ -7,11 +7,11 @@ node_modules/.tmp/make/install: package.json
 	@which yarn && yarn || npm install
 	@$(MAKE) -s _modified MODIFIED=install
 .PHONY: install-continue
-install-continue: deps/libgtop deps/glib
+install-continue: deps/libgtop/.git deps/glib/.git
 	# @node-pre-gyp install --fallback-to-build
-deps/libgtop:
+deps/libgtop/.git:
 	$(MAKE) -s _submodules
-deps/glib:
+deps/glib/.git:
 	$(MAKE) -s _submodules
 .PHONY: _submodules
 _submodules:
