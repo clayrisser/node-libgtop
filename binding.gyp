@@ -13,7 +13,7 @@
         'clib/main.cc'
       ],
       'libraries': [
-        '<!@(ls -1 deps/glib/build/glib/*.so)'
+        '<!@(ls -1 /home/codejamninja/Projects/node-libgtop/deps/glib/build/glib/*.so)'
       ]
     }
   ]

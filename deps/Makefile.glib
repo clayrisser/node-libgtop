@@ -1,0 +1,14 @@
+.PHONY: configure
+configure: glib/build
+glib/build:
+	@cd glib && meson build
+
+.PHONY: build
+build: glib/build/glib/libglib-2.0.so
+glib/build/glib/libglib-2.0.so: configure
+	@cd glib && ninja -C build
+
+.PHONY: clean
+clean:
+	@cd glib && git add . && git reset --hard
+	-@rm -rf glib/build || true

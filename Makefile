@@ -17,11 +17,18 @@ deps/glib/.git:
 _submodules:
 	@git submodule update --init --recursive
 
+.PHONY: configure
+configure: install
+	@cd deps && $(MAKE) -s -f Makefile.glib build
+	@cd deps && $(MAKE) -s -f Makefile.libgtop configure
+	@node_modules/.bin/node-pre-gyp clean configure
+
 .PHONY: build
-build: install test-cache lib
-lib: src
-	@rm -rf lib
-	@node_modules/.bin/babel src -d lib --extensions ".ts,.tsx" --source-maps inline
+build: configure
+	@node_modules/.bin/node-pre-gyp build package
+# lib: src
+	# @rm -rf lib
+	# @node_modules/.bin/babel src -d lib --extensions ".ts,.tsx" --source-maps inline
 
 .PHONY: format-cache
 format-cache: node_modules/.tmp/make/format-cache
@@ -75,10 +82,13 @@ start: install lint
 
 .PHONY: clean
 clean: install
+	@cd deps && $(MAKE) -s -f Makefile.glib clean
+	@cd deps && $(MAKE) -s -f Makefile.libgtop clean
 	@git clean -fXd -e \!node_modules -e \!node_modules/**/* -e \!yarn.lock
+	@node_modules/.bin/jest --clearCache
+	@node_modules/.bin/node-pre-gyp clean
 	-@rm -rf node_modules/.cache || true
 	-@rm -rf node_modules/.tmp || true
-	@node_modules/.bin/jest --clearCache
 
 .PHONY: purge
 purge: clean
@@ -89,3 +99,8 @@ _modified:
 	@mkdir -p node_modules/.tmp/make/$(MODIFIED)
 	@rm -f node_modules/.tmp/make/$(MODIFIED)/.modified
 	@touch -m node_modules/.tmp/make/$(MODIFIED)/.modified
+
+
+    # "prepare": "npm run build:notest",
+    # "prepublish": "npm run build",
+    # "prepublishOnly": "node-pre-gyp-github publish --release",

@@ -1,0 +1,14 @@
+.PHONY: configure
+configure: libgtop/config.h
+libgtop/config.h:
+	@cd libgtop && ./autogen.sh
+	@cd libgtop/lib && mv close.c _close.c
+	@cd libgtop/lib && mv open.c _open.c
+	@cd libgtop/sysdeps/common && mv fsusage.c fsusage.c_
+	@cd libgtop/sysdeps/common && mv mountlist.c _mountlist.c
+	@cd libgtop/sysdeps/common && mv procargs.c _procargs.c
+
+.PHONY: clean
+clean:
+	@rm -f libgtop/config.h
+	@cd libgtop && git add . && git reset --hard

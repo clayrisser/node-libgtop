@@ -39,9 +39,6 @@
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
     "node-pre-gyp": "node-pre-gyp",
     "node-gyp": "node-gyp",
-    "prepare": "npm run build:notest",
-    "prepublish": "npm run build",
-    "prepublishOnly": "node-pre-gyp-github publish --release",
     "start": "babel-node --extensions \".ts,.tsx\" example",
     "test": "npm run lint && jest"
   },
