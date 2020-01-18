@@ -3,19 +3,17 @@
     {
       'target_name': 'gtop',
       'dependencies' : [
-        './deps/libgtop.gyp:libgtop'
-      ],
-      'libraries': [
-        '<!@(pkg-config --libs glib-2.0)'
-      ],
-      'cflags': [
-        '<!@(pkg-config --cflags glib-2.0)',
+        'deps/libgtop.gyp:libgtop',
+        'deps/glib.gyp:glib'
       ],
       'include_dirs': [
         '<!(node -e "require(\'nan\')")'
       ],
       'sources': [
         'clib/main.cc'
+      ],
+      'libraries': [
+        '<!@(ls -1 deps/glib/build/glib/*.so)'
       ]
     }
   ]
