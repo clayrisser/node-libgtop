@@ -1,0 +1,9 @@
+[submodule "libgtop"]
+	path = libgtop
+	url = git@github.com:GNOME/libgtop.git
+[submodule "deps/libgtop"]
+	path = deps/libgtop
+	url = git@github.com:GNOME/libgtop.git
+[submodule "deps/glib"]
+	path = deps/glib
+	url = git@github.com:GNOME/glib.git
