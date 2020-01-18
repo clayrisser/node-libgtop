@@ -29,18 +29,20 @@
     "url": "https://github.com/codejamninja/libgtop.git"
   },
   "scripts": {
-    "build": "npm run test && npm run build:notest",
-    "build:notest": "tsc -d --emitDeclarationOnly && babel src -d lib --extensions \".ts,.tsx\" --source-maps inline && node-pre-gyp clean configure build package",
-    "clean": "git clean -fXd -e \\!node_modules -e \\!node_modules/**/* && jest --clearCache",
-    "clean:purge": "jest --clearCache && git clean -fXd",
-    "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
+    "build": "make -s build",
+    "clean": "make -s clean",
+    "format": "make -s format",
     "install": "make -s install-continue",
-    "lint": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx ./",
-    "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
-    "node-pre-gyp": "node-pre-gyp",
+    "lint": "make -s lint",
     "node-gyp": "node-gyp",
-    "start": "babel-node --extensions \".ts,.tsx\" example",
-    "test": "npm run lint && jest"
+    "node-pre-gyp": "node-pre-gyp",
+    "node-pre-gyp-github": "node-pre-gyp-github",
+    "prepublish": "make -s prepublish",
+    "prepublishOnly": "make -s prepublish-only",
+    "purge": "make -s purge",
+    "spellcheck": "make -s spellcheck",
+    "start": "make -s start",
+    "test": "make -s test"
   },
   "dependencies": {
     "bindings": "^1.5.0",
@@ -58,6 +60,7 @@
     "@types/node": "^13.1.6",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
+    "cspell": "^4.0.44",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^6.3.1",
     "eslint-config-jam": "^0.2.20",
