@@ -31,9 +31,10 @@ build/config.gypi:
 .PHONY: build
 build: lib build/Release/gtop.node
 build/Release/gtop.node: build/config.gypi
-	@node_modules/.bin/node-pre-gyp build package
+	@node_modules/.bin/node-pre-gyp build
 	@mkdir -p build/Release/obj.target/libs
 	@cp -r deps/glib/build/glib/*.so* build/Release/obj.target/libs
+	@node_modules/.bin/node-pre-gyp package
 lib: node_modules/.tmp/eslintReport.json
 	@rm -rf lib
 	@node_modules/.bin/babel src -d lib --extensions ".ts,.tsx" --source-maps inline
