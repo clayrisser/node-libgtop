@@ -7,6 +7,12 @@ libgtop/config.h:
 	@cd libgtop/sysdeps/common && mv fsusage.c fsusage.c_
 	@cd libgtop/sysdeps/common && mv mountlist.c _mountlist.c
 	@cd libgtop/sysdeps/common && mv procargs.c _procargs.c
+	@sed -i 's/glibtop_get_netload_l/glibtop_get_netload_s/g' libgtop/sysdeps/common/default.c
+	@sed -i 's/glibtop_get_uptime_l/glibtop_get_uptime_s/g' libgtop/sysdeps/common/default.c
+	@sed -i 's/return glibtop_get_netlist_l/return glibtop_get_netlist_s/g' libgtop/sysdeps/common/default.c
+	@sed -i 's/return glibtop_get_proc_args_l/return glibtop_get_proc_args_s/g' libgtop/sysdeps/common/default.c
+	@sed -i 's/return glibtop_get_proclist_l/return glibtop_get_proclist_s/g' libgtop/sysdeps/common/default.c
+
 
 .PHONY: clean
 clean:

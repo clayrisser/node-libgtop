@@ -102,7 +102,9 @@ prepublish:
 	@$(MAKE) -s build
 
 .PHONY: prepublish-only
-prepublish-only: build
+prepublish-only:
+	@rm -rf build
+	@$(MAKE) -s build
 	@node_modules/.bin/node-pre-gyp-github publish --release
 
 .PHONY: _modified
