@@ -19,6 +19,7 @@
     "url": "https://codejam.ninja"
   },
   "files": [
+    "Makefile",
     "binding.gyp",
     "clib",
     "lib"
