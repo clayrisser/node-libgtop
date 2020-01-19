@@ -1,6 +1,6 @@
 {
   "name": "libgtop",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "libgtop",
@@ -38,7 +38,6 @@
     "node-gyp": "node-gyp",
     "node-pre-gyp": "node-pre-gyp",
     "node-pre-gyp-github": "node-pre-gyp-github",
-    "prepublish": "make -s prepublish",
     "prepublish": "make -s prepublish",
     "prepublishOnly": "make -s prepublish-only",
     "purge": "make -s purge",
