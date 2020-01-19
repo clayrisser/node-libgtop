@@ -32,8 +32,8 @@ build/config.gypi:
 build: lib build/Release/gtop.node
 build/Release/gtop.node: build/config.gypi
 	@node_modules/.bin/node-pre-gyp build
-	@mkdir -p build/Release/obj.target/libs
-	@cp -r deps/glib/build/glib/*.so* build/Release/obj.target/libs
+	@mkdir -p build/Release/obj.libs
+	@cp -r deps/glib/build/glib/*.so* build/Release/obj.libs
 	@node_modules/.bin/node-pre-gyp package
 lib: node_modules/.tmp/eslintReport.json
 	@rm -rf lib
