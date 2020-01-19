@@ -39,6 +39,7 @@
     "node-pre-gyp": "node-pre-gyp",
     "node-pre-gyp-github": "node-pre-gyp-github",
     "prepublish": "make -s prepublish",
+    "prepublish": "make -s prepublish",
     "prepublishOnly": "make -s prepublish-only",
     "purge": "make -s purge",
     "spellcheck": "make -s spellcheck",

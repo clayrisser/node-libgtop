@@ -6,9 +6,13 @@ install: node_modules/.tmp/make/install
 node_modules/.tmp/make/install: package.json
 	@which yarn && yarn || npm install
 	@$(MAKE) -s _modified MODIFIED=install
+
 .PHONY: install-continue
-install-continue: deps/libgtop/.git deps/glib/.git
-	# @node-pre-gyp install --fallback-to-build
+install-continue:
+	-@node-pre-gyp install --fallback-to-build
+
+.PHONY: prepublish
+prepublish: deps/libgtop/.git deps/glib/.git
 deps/libgtop/.git:
 	$(MAKE) -s _submodules
 deps/glib/.git:
