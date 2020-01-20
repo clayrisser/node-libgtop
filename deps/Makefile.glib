@@ -5,10 +5,10 @@ glib/build:
 
 .PHONY: build
 build: glib/build/glib/libglib-2.0.a
-glib/build/glib/libglib-2.0.so: configure
+glib/build/glib/libglib-2.0.a: configure
 	@cd glib && ninja -C build
 
 .PHONY: clean
 clean:
-	@cd glib && git add . && git reset --hard
 	-@rm -rf glib/build || true
+	@cd glib && git add . && git reset --hard

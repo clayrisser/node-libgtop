@@ -1,3 +1,10 @@
+PLATFORM := $(shell node -e "process.stdout.write(process.platform)")
+ifeq ($(PLATFORM), win32)
+  SHELL = cmd
+endif
+
+.EXPORT_ALL_VARIABLES:
+
 .PHONY: all
 all: build
 
@@ -36,33 +43,27 @@ lib: node_modules/.tmp/eslintReport.json
 .PHONY: format-cache
 format-cache: node_modules/.tmp/make/format-cache
 node_modules/.tmp/make/format-cache: $(shell git ls-files)
-	@$(MAKE) -s _format
+	@$(MAKE) -s format
 .PHONY: format
-format: _format
-.PHONY: _format
-_format: install
+format: install
 	@prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore
 	@$(MAKE) -s _modified MODIFIED=format-cache
 
 .PHONY: spellcheck-cache
 spellcheck-cache: node_modules/.tmp/make/spellcheck-cache
-node_modules/.tmp/make/spellcheck-cache: node_modules/.tmp/make/format-cache $(shell git ls-files)
-	@$(MAKE) -s _spellcheck
+node_modules/.tmp/make/spellcheck-cache: $(shell git ls-files)
+	@$(MAKE) -s spellcheck
 .PHONY: spellcheck
-spellcheck: format _spellcheck
-.PHONY: _spellcheck
-_spellcheck:
+spellcheck: format-cache
 	-@cspell --config .cspellrc src/**/*.ts prisma/schema.prisma.tmpl
 	@$(MAKE) -s _modified MODIFIED=spellcheck-cache
 
 .PHONY: lint-cache
 lint-cache: node_modules/.tmp/eslintReport.json
-node_modules/.tmp/eslintReport.json: node_modules/.tmp/make/spellcheck-cache $(shell git ls-files)
-	@$(MAKE) -s _lint
+node_modules/.tmp/eslintReport.json: $(shell git ls-files)
+	@$(MAKE) -s lint
 .PHONY: lint
-lint: spellcheck _lint
-.PHONY: _lint
-_lint:
+lint: spellcheck-cache
 	-@tsc --allowJs --noEmit
 	-@eslint --fix --ext .ts,.tsx .
 	-@eslint -f json -o node_modules/.tmp/eslintReport.json --ext .ts,.tsx ./
@@ -70,12 +71,10 @@ _lint:
 
 .PHONY: test-cache
 test-cache: coverage
-coverage: node_modules/.tmp/make/lint-cache $(shell git ls-files)
-	@$(MAKE) -s _test
+coverage: $(shell git ls-files)
+	@$(MAKE) -s test
 .PHONY: test
-test: lint _test
-.PHONY: _test
-_test:
+test: lint-cache
 	-@rm -rf coverage || true
 	@jest --coverage
 

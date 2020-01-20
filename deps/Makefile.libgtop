@@ -2,19 +2,26 @@
 configure: libgtop/config.h
 libgtop/config.h:
 	@cd libgtop && ./autogen.sh
-	@cd libgtop/lib && mv close.c _close.c
-	@cd libgtop/lib && mv open.c _open.c
-	@cd libgtop/sysdeps/common && mv fsusage.c fsusage.c_
-	@cd libgtop/sysdeps/common && mv mountlist.c _mountlist.c
-	@cd libgtop/sysdeps/common && mv procargs.c _procargs.c
-	@sed -i 's/glibtop_get_netload_l/glibtop_get_netload_s/g' libgtop/sysdeps/common/default.c
-	@sed -i 's/glibtop_get_uptime_l/glibtop_get_uptime_s/g' libgtop/sysdeps/common/default.c
-	@sed -i 's/return glibtop_get_netlist_l/return glibtop_get_netlist_s/g' libgtop/sysdeps/common/default.c
-	@sed -i 's/return glibtop_get_proc_args_l/return glibtop_get_proc_args_s/g' libgtop/sysdeps/common/default.c
-	@sed -i 's/return glibtop_get_proclist_l/return glibtop_get_proclist_s/g' libgtop/sysdeps/common/default.c
+	# @cd libgtop/lib && mv close.c _close.c
+	# @cd libgtop/lib && mv open.c _open.c
+	# @cd libgtop/sysdeps/common && mv fsusage.c fsusage.c_
+	# @cd libgtop/sysdeps/common && mv mountlist.c _mountlist.c
+	# @cd libgtop/sysdeps/common && mv procargs.c _procargs.c
+	# @sed -i 's/glibtop_get_netload_l/glibtop_get_netload_s/g' libgtop/sysdeps/common/default.c
+	# @sed -i 's/glibtop_get_uptime_l/glibtop_get_uptime_s/g' libgtop/sysdeps/common/default.c
+	# @sed -i 's/return glibtop_get_netlist_l/return glibtop_get_netlist_s/g' libgtop/sysdeps/common/default.c
+	# @sed -i 's/return glibtop_get_proc_args_l/return glibtop_get_proc_args_s/g' libgtop/sysdeps/common/default.c
+	# @sed -i 's/return glibtop_get_proclist_l/return glibtop_get_proclist_s/g' libgtop/sysdeps/common/default.c
 
+.PHONY: build
+build: configure libgtop/build
+libgtop/build:
+	@mkdir -p libgtop/build
+	@cd libgtop/build && ../configure
+	@cd libgtop/build && make
 
 .PHONY: clean
 clean:
-	@rm -f libgtop/config.h
+	-@cd libgtop/build && make distclean
+	-@rm -rf libgtop/config.h libgtop/build || true
 	@cd libgtop && git add . && git reset --hard
