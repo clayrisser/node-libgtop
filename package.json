@@ -1,6 +1,6 @@
 {
   "name": "libgtop",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "libgtop",
