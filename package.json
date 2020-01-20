@@ -48,6 +48,7 @@
   "dependencies": {
     "bindings": "^1.5.0",
     "core-js": "^3.6.3",
+    "gnumake": "^0.0.7",
     "nan": "^2.14.0",
     "node-pre-gyp": "^0.14.0"
   },

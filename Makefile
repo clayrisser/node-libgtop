@@ -26,18 +26,18 @@ configure: install build/config.gypi
 build/config.gypi:
 	@cd deps && $(MAKE) -s -f Makefile.glib build
 	@cd deps && $(MAKE) -s -f Makefile.libgtop configure
-	@node_modules/.bin/node-pre-gyp clean configure
+	@node-pre-gyp clean configure
 
 .PHONY: build
 build: lib build/Release/gtop.node
 build/Release/gtop.node: build/config.gypi
-	@node_modules/.bin/node-pre-gyp build
+	@node-pre-gyp build
 	@mkdir -p build/Release/obj.libs
 	@cp -r deps/glib/build/glib/*.so* build/Release/obj.libs
-	@node_modules/.bin/node-pre-gyp package
+	@node-pre-gyp package
 lib: node_modules/.tmp/eslintReport.json
 	@rm -rf lib
-	@node_modules/.bin/babel src -d lib --extensions ".ts,.tsx" --source-maps inline
+	@babel src -d lib --extensions ".ts,.tsx" --source-maps inline
 
 .PHONY: format-cache
 format-cache: node_modules/.tmp/make/format-cache
@@ -47,7 +47,7 @@ node_modules/.tmp/make/format-cache: $(shell git ls-files)
 format: _format
 .PHONY: _format
 _format: install
-	@node_modules/.bin/prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore
+	@prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore
 	@$(MAKE) -s _modified MODIFIED=format-cache
 
 .PHONY: spellcheck-cache
@@ -58,7 +58,7 @@ node_modules/.tmp/make/spellcheck-cache: node_modules/.tmp/make/format-cache $(s
 spellcheck: format _spellcheck
 .PHONY: _spellcheck
 _spellcheck:
-	-@node_modules/.bin/cspell --config .cspellrc src/**/*.ts prisma/schema.prisma.tmpl
+	-@cspell --config .cspellrc src/**/*.ts prisma/schema.prisma.tmpl
 	@$(MAKE) -s _modified MODIFIED=spellcheck-cache
 
 .PHONY: lint-cache
@@ -69,9 +69,9 @@ node_modules/.tmp/eslintReport.json: node_modules/.tmp/make/spellcheck-cache $(s
 lint: spellcheck _lint
 .PHONY: _lint
 _lint:
-	-@node_modules/.bin/tsc --allowJs --noEmit
-	-@node_modules/.bin/eslint --fix --ext .ts,.tsx .
-	-@node_modules/.bin/eslint -f json -o node_modules/.tmp/eslintReport.json --ext .ts,.tsx ./
+	-@tsc --allowJs --noEmit
+	-@eslint --fix --ext .ts,.tsx .
+	-@eslint -f json -o node_modules/.tmp/eslintReport.json --ext .ts,.tsx ./
 	@$(MAKE) -s _modified MODIFIED=lint-cache
 
 .PHONY: test-cache
@@ -83,16 +83,16 @@ test: lint _test
 .PHONY: _test
 _test:
 	-@rm -rf coverage || true
-	@node_modules/.bin/jest --coverage
+	@jest --coverage
 
 .PHONY: start
 start: node_modules/.tmp/eslintReport.json
-	@node_modules/.bin/babel-node --extensions '.ts,.tsx' example
+	@babel-node --extensions '.ts,.tsx' example
 
 .PHONY: clean
 clean:
-	-@node_modules/.bin/jest --clearCache
-	-@node_modules/.bin/node-pre-gyp clean
+	-@jest --clearCache
+	-@node-pre-gyp clean
 	-@rm -rf node_modules/.cache || true
 	-@rm -rf node_modules/.tmp || true
 	@cd deps && $(MAKE) -s -f Makefile.glib clean
@@ -112,7 +112,7 @@ prepublish:
 prepublish-only:
 	@rm -rf build
 	@$(MAKE) -s build
-	@node_modules/.bin/node-pre-gyp-github publish --release
+	@node-pre-gyp-github publish --release
 
 .PHONY: _modified
 _modified:
