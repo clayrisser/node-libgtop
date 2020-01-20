@@ -1,17 +1,18 @@
 .PHONY: configure
 configure: libgtop/build/config.h
 libgtop/build/config.h:
-	@cd libgtop && autoreconf -i
+	@cd libgtop && ./autogen.sh
+	@cd libgtop && $(MAKE) distclean
 	@mkdir -p libgtop/build
 	@cd libgtop/build && ../configure
 
 .PHONY: build
 build: configure libgtop/build/lib/.libs/libgtop-2.0.a
 libgtop/build/lib/.libs/libgtop-2.0.a:
-	@cd libgtop/build && make CFLAGS="-fPIC"
+	@cd libgtop/build && $(MAKE) CFLAGS="-fPIC"
 
 .PHONY: clean
 clean:
-	-@cd libgtop/build && make distclean
+	-@cd libgtop/build && $(MAKE) distclean
 	-@rm -rf libgtop/config.h libgtop/build || true
 	@cd libgtop && git add . && git reset --hard
