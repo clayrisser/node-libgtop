@@ -18,23 +18,13 @@ node_modules/.tmp/make/install: package.json
 install-continue:
 	-@node-pre-gyp install --fallback-to-build
 
-.PHONY: prepublish
-prepublish: deps/libgtop/.git deps/glib/.git
-deps/libgtop/.git:
-	$(MAKE) -s _submodules
-deps/glib/.git:
-	$(MAKE) -s _submodules
-.PHONY: _submodules
-_submodules:
-	@git submodule update --init --recursive
-
 .PHONY: build
 build: lib build/Release/gtop.node
 build/config.gypi:
-	@cd deps && $(MAKE) -s -f Makefile.glib build
-	@cd deps && $(MAKE) -s -f Makefile.libgtop build
 	@node-pre-gyp clean configure
 build/Release/gtop.node: build/config.gypi
+	@cd deps && $(MAKE) -s -f Makefile.glib build
+	@cd deps && $(MAKE) -s -f Makefile.libgtop build
 	@node-pre-gyp build package
 lib: node_modules/.tmp/eslintReport.json
 	@rm -rf lib
@@ -97,9 +87,16 @@ purge: clean
 	@git clean -fXd
 
 .PHONY: prepublish
-prepublish:
+prepublish: deps/libgtop/.git deps/glib/.git
 	@$(MAKE) -s _modified MODIFIED=install
 	@$(MAKE) -s build
+deps/libgtop/.git:
+	$(MAKE) -s _submodules
+deps/glib/.git:
+	$(MAKE) -s _submodules
+.PHONY: _submodules
+_submodules:
+	@git submodule update --init --recursive
 
 .PHONY: prepublish-only
 prepublish-only:
