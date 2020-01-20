@@ -1,6 +1,7 @@
 .PHONY: configure
 configure: libgtop/build/config.h
 libgtop/build/config.h:
+	@autoreconf -i
 	@mkdir -p libgtop/build
 	@cd libgtop/build && ../configure
 
