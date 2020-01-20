@@ -1,6 +1,6 @@
 {
   "name": "libgtop",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "nodejs addon for getting os process information",
   "keywords": [
     "libgtop",
@@ -48,7 +48,7 @@
   "dependencies": {
     "bindings": "^1.5.0",
     "core-js": "^3.6.3",
-    "gnumake": "^0.0.7",
+    "gnumake": "^0.0.18",
     "nan": "^2.14.0",
     "node-pre-gyp": "^0.14.0"
   },
