@@ -2,18 +2,21 @@
   'targets': [
     {
       'target_name': 'gtop',
-      'dependencies' : [
-        'deps/libgtop.gyp:libgtop',
-        'deps/glib.gyp:glib'
-      ],
       'include_dirs': [
-        '<!(node -e "require(\'nan\')")'
+        '/usr/include/glib-2.0',
+        '/usr/lib/x86_64-linux-gnu/glib-2.0/include',
+        '<!(node -e "require(\'nan\')")',
+        '<(module_path)/../../deps/libgtop',
+        '<(module_path)/../../deps/libgtop/_build',
+        '<(module_path)/../../deps/libgtop/include',
+        '<(module_path)/../../deps/libgtop/sysdeps/linux'
       ],
       'sources': [
         'clib/main.cc'
       ],
       'libraries': [
-        '<!@(ls -1 /home/codejamninja/Projects/node-libgtop/deps/glib/build/glib/*.so)'
+        '-lglib-2.0',
+        '<(module_path)/../../deps/libgtop/_build/lib/.libs/libgtop-2.0.a'
       ]
     }
   ]

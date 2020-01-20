@@ -19,13 +19,13 @@ deps/glib/.git:
 	$(MAKE) -s _submodules
 .PHONY: _submodules
 _submodules:
-	@git submodule update --init --recursive
+	# @git submodule update --init --recursive
 
 .PHONY: configure
 configure: install build/config.gypi
 build/config.gypi:
-	@cd deps && $(MAKE) -s -f Makefile.glib build
-	@cd deps && $(MAKE) -s -f Makefile.libgtop configure
+	# @cd deps && $(MAKE) -s -f Makefile.glib build
+	# @cd deps && $(MAKE) -s -f Makefile.libgtop configure
 	@node-pre-gyp clean configure
 
 .PHONY: build
@@ -33,7 +33,7 @@ build: lib build/Release/gtop.node
 build/Release/gtop.node: build/config.gypi
 	@node-pre-gyp build
 	@mkdir -p build/Release/obj.libs
-	@cp -r deps/glib/build/glib/*.so* build/Release/obj.libs
+	# @cp -r deps/glib/build/glib/*.so* build/Release/obj.libs
 	@node-pre-gyp package
 lib: node_modules/.tmp/eslintReport.json
 	@rm -rf lib
