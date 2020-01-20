@@ -13,12 +13,12 @@
         '<(module_path)/../../deps/libgtop/include',
         '<(module_path)/../../deps/libgtop/sysdeps/linux'
       ],
-      'sources': [
-        'clib/main.cc'
-      ],
       'libraries': [
         '<(module_path)/../../deps/glib/build/glib/libglib-2.0.a',
         '<(module_path)/../../deps/libgtop/_build/lib/.libs/libgtop-2.0.a'
+      ],
+      'sources': [
+        'clib/main.cc'
       ]
     }
   ]

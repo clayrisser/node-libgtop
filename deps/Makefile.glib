@@ -1,10 +1,10 @@
 .PHONY: configure
 configure: glib/build
 glib/build:
-	@cd glib && meson build
+	@cd glib && meson --default-library=static build
 
 .PHONY: build
-build: glib/build/glib/libglib-2.0.so
+build: glib/build/glib/libglib-2.0.a
 glib/build/glib/libglib-2.0.so: configure
 	@cd glib && ninja -C build
 
