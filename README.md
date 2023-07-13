@@ -4,6 +4,8 @@
 
 > nodejs addon for getting os process information
 
+![](assets/node-libgtop.png)
+
 Please ★ this repo if you found it useful ★ ★ ★
 
 ## Features
